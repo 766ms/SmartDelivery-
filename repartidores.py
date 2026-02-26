@@ -1,11 +1,21 @@
-def repartidores (ruta, nombre) :
-    return ruta, nombre
-ruta=  ["marbella", "ciudad jardin", "bocagrande", "manga" "todo los barrios"]
-nombre= ["Garridita","Bleyder", "Yudis", "Sebastian", "Jose"]
-print("0. marbella - Garridita")
-print("1. ciudad jardin - Bleyder")
-print("2. bocagrande - Yudis")
-print("3. manga - Sebastian") 
-print("4. todos los barrios - Jose") 
+
+def repartidores(**kwargs):
+    return kwargs
+
+repartidores_info = repartidores(
+    Garridita="marbella",
+    Bleyder="ciudad jardin",
+    Yudis="bocagrande",
+    Sebastian="manga",
+    Jose="todos los barrios"
+)
+
+for i, (nombre, ruta) in enumerate(repartidores_info.items()):
+    print(f"{i}. {ruta} - {nombre}")
+
 selectrepartidor = int(input("Escoge el número del barrio: "))
-print(f"El repartidor seleccionado es {nombre[selectrepartidor]} y su ruta es por {ruta[selectrepartidor]}")
+
+nombre = list(repartidores_info.keys())[selectrepartidor]
+ruta = list(repartidores_info.values())[selectrepartidor]
+
+print(f"El repartidor seleccionado es {nombre} y su ruta es por {ruta}")
