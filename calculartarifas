@@ -1,6 +1,6 @@
-```python
-def tarifas(repartidor, envios_realizados, total):
-    return repartidor, envios_realizados, total
+
+def tarifas(*args, **kwargs):
+    return args, kwargs
 
 nombre = ["Garridita", "Bleyder", "Yudis", "Sebastian", "Jose"]
 barrio = ["marbella", "ciudad jardin", "bocagrande", "manga"]
@@ -14,22 +14,20 @@ while seguir == "s":
     print("\n=== ASIGNAR ENVÍO ===")
     print("0. Garridita  1. Bleyder  2. Yudis  3. Sebastian  4. Jose")
     select_rep = int(input("Escoge el repartidor: "))
-
     print("\n0. marbella - $2000")
     print("1. ciudad jardin - $5000")
     print("2. bocagrande - $1000")
     print("3. manga - $2000")
     select_barrio = int(input("Escoge el barrio del envío: "))
-
     total_por_repartidor[select_rep] += precios[select_barrio]
     envios_por_repartidor[select_rep] += 1
-
-    print(f"\nEnvío asignado a {nombre[select_rep]} en {barrio[select_barrio]}")
-    
+    resultado = tarifas(nombre[select_rep], barrio[select_barrio], precio=precios[select_barrio])
+    args_resultado, kwargs_resultado = resultado
+    rep, bar = args_resultado[0], args_resultado[1]
+    print(f"\nEnvío asignado a {rep} en {bar} por ${kwargs_resultado['precio']}")
     seguir = input("¿Agregar otro envío? (s/n): ")
 
 print("\n=== RESUMEN DE TARIFAS ===")
 for i in range(len(nombre)):
     if envios_por_repartidor[i] > 0:
         print(f"{nombre[i]}: {envios_por_repartidor[i]} envíos - Total: ${total_por_repartidor[i]}")
-```
